@@ -18,9 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var allFilmsModel: AllFilmsModel?
 	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-		if let FilmsTableViewController = window?.rootViewController as? FilmsTableViewController {
-			allFilmsModel = AllFilmsModel(managedObjectContext: coreDataStack.managedObjectContext!)
-			FilmsTableViewController.viewModel = allFilmsModel
+		if let navigationController = window?.rootViewController as? UINavigationController,
+			let filmsTableViewController = navigationController.viewControllers.first as? FilmsTableViewController {
+				allFilmsModel = AllFilmsModel(managedObjectContext: coreDataStack.managedObjectContext!)
+				filmsTableViewController.viewModel = allFilmsModel
 		}
 		sfFilmMediator = SFFilmMediator(coreDataStack: coreDataStack)
 		sfFilmMediator!.loadFilmData()
