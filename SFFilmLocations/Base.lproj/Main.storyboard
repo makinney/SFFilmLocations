@@ -3,24 +3,61 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Film Locations Table View Controller-->
+        <!--Films Table View Controller-->
         <scene sceneID="6YO-cc-ZkV">
             <objects>
-                <tableViewController id="hSE-jT-7rc" customClass="FilmLocationsTableViewController" customModule="SFFilmLocations" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="XO2-HU-Be8">
+                <tableViewController id="hSE-jT-7rc" customClass="FilmsTableViewController" customModule="SFFilmLocations" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" id="XO2-HU-Be8">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilmCellReuseID" id="glX-n3-pGA">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilmTableViewCell" id="glX-n3-pGA" customClass="FilmTableViewCell" customModule="SFFilmLocations" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="600" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="glX-n3-pGA" id="yir-GU-GHs">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="YJ2-ie-UB5">
+                                            <rect key="frame" x="8" y="8" width="584" height="48"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="filmName" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJL-P3-4zN" userLabel="FilmName">
+                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XdJ-OM-B84">
+                                                    <rect key="frame" x="0.0" y="17" width="584" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="location" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SP9-ac-HHI">
+                                                    <rect key="frame" x="0.0" y="33" width="584" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="YJ2-ie-UB5" secondAttribute="bottom" id="DFs-W5-k1T"/>
+                                        <constraint firstItem="YJ2-ie-UB5" firstAttribute="leading" secondItem="yir-GU-GHs" secondAttribute="leadingMargin" id="KF9-cd-beQ"/>
+                                        <constraint firstItem="YJ2-ie-UB5" firstAttribute="top" secondItem="yir-GU-GHs" secondAttribute="topMargin" id="gpl-Zc-jGZ"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="YJ2-ie-UB5" secondAttribute="trailing" id="tcH-hk-VaM"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="filmName" destination="RJL-P3-4zN" id="TAG-GQ-MHb"/>
+                                    <outlet property="location" destination="SP9-ac-HHI" id="5ZG-h0-iIr"/>
+                                    <outlet property="releaseDate" destination="XdJ-OM-B84" id="PVJ-zw-wbW"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -28,6 +65,9 @@
                             <outlet property="delegate" destination="hSE-jT-7rc" id="BbR-mg-MkM"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="tableView" destination="XO2-HU-Be8" id="P0H-Bc-Nef"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xm0-fq-Ies" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

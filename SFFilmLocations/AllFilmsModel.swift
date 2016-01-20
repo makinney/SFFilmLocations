@@ -11,12 +11,12 @@ import CoreData
 
 class AllFilmsModel: NSObject, AllFilmsModelProtocol {
 	
-	let filmsChanged: Dynamic<Bool>
+	let contentChanged: Dynamic<Bool>
 	var numberOfFilms : Int {
 		return films.count
 	}
 	func film(index: Int) -> FilmModelProtocol? {
-		guard index > 0 && index < films.count else {
+		guard index >= 0 && index < films.count else {
 			return nil
 		}
 		return films[index]
@@ -26,7 +26,7 @@ class AllFilmsModel: NSObject, AllFilmsModelProtocol {
 	private let moc: NSManagedObjectContext
 	
 	init(managedObjectContext moc: NSManagedObjectContext) {
-		filmsChanged = Dynamic(false)
+		contentChanged = Dynamic(false)
 		self.moc = moc
 		super.init()
 		fetchedResultsController.delegate = self
@@ -38,7 +38,6 @@ class AllFilmsModel: NSObject, AllFilmsModelProtocol {
 		let sortDesciptors = [NSSortDescriptor(key: FilmModelAttribute.title, ascending: false)]
 		fetchRequest.sortDescriptors = sortDesciptors
 		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
-		
 		return frc
 	}()
 	
@@ -57,11 +56,9 @@ class AllFilmsModel: NSObject, AllFilmsModelProtocol {
 extension AllFilmsModel: NSFetchedResultsControllerDelegate {
 	
 	func controllerDidChangeContent(controller: NSFetchedResultsController) {
-		filmsChanged.value = true
-		print("data changed")
 		if let fetchedObjects = fetchedResultsController.fetchedObjects {
 			films = fetchedObjects as? [Film] ?? []
-			print("fetched \(films.count) films")
 		}
+		contentChanged.value = true
 	}
 }

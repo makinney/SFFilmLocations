@@ -9,7 +9,7 @@
 import Foundation
 
 protocol AllFilmsModelProtocol {
-	var filmsChanged: Dynamic<Bool> { get }
+	var contentChanged: Dynamic<Bool> { get }
 	func film(index: Int) -> FilmModelProtocol?
 	var numberOfFilms: Int { get }
 }
