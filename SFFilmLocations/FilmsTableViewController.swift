@@ -51,6 +51,7 @@ class FilmsTableViewController: UITableViewController {
 		cell.filmName.text = film.movieTitle
 		cell.releaseDate.text = film.movieReleaseYear
 		cell.location.text = film.movieLocation
+		cell.backgroundColor = (indexPath.row % 2 == 0) ? UIColor.whiteColor() : UIColor.lightGrayColor()
 		return cell
 	}
 	
