@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F039C5D1C503CF600B49F18 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F039C5C1C503CF600B49F18 /* CoreDataController.swift */; };
 		1F23DCDE1C4ED5E6008F937F /* CoreDataIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F23DCDD1C4ED5E6008F937F /* CoreDataIdentifiers.swift */; };
 		1F23DCE01C4EE78C008F937F /* FilmModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F23DCDF1C4EE78C008F937F /* FilmModelProtocol.swift */; };
 		1F23DCE41C4F47D1008F937F /* FilmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F23DCE31C4F47D1008F937F /* FilmTableViewCell.swift */; };
@@ -20,7 +21,6 @@
 		1F2D282A1C4D7E270000DEE6 /* FilmsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D28291C4D7E270000DEE6 /* FilmsTableViewController.swift */; };
 		1F2D282C1C4DA7C10000DEE6 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D282B1C4DA7C10000DEE6 /* WebService.swift */; };
 		1F2D28301C4DB1050000DEE6 /* SFFilmMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D282F1C4DB1050000DEE6 /* SFFilmMediator.swift */; };
-		1FFDD7581C4DCCAE004C2CC0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFDD7571C4DCCAE004C2CC0 /* CoreDataStack.swift */; };
 		1FFDD7641C4DD9DD004C2CC0 /* Film+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFDD7621C4DD9DD004C2CC0 /* Film+CoreDataProperties.swift */; };
 		1FFDD7651C4DD9DD004C2CC0 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFDD7631C4DD9DD004C2CC0 /* Film.swift */; };
 		1FFDD7681C4EAF61004C2CC0 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFDD7671C4EAF61004C2CC0 /* Dynamic.swift */; };
@@ -46,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F039C5C1C503CF600B49F18 /* CoreDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		1F23DCDD1C4ED5E6008F937F /* CoreDataIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataIdentifiers.swift; sourceTree = "<group>"; };
 		1F23DCDF1C4EE78C008F937F /* FilmModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilmModelProtocol.swift; sourceTree = "<group>"; };
 		1F23DCE31C4F47D1008F937F /* FilmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilmTableViewCell.swift; sourceTree = "<group>"; };
@@ -65,7 +66,6 @@
 		1F2D28291C4D7E270000DEE6 /* FilmsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FilmsTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1F2D282B1C4DA7C10000DEE6 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		1F2D282F1C4DB1050000DEE6 /* SFFilmMediator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFFilmMediator.swift; sourceTree = "<group>"; };
-		1FFDD7571C4DCCAE004C2CC0 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		1FFDD7621C4DD9DD004C2CC0 /* Film+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Film+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1FFDD7631C4DD9DD004C2CC0 /* Film.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		1FFDD7671C4EAF61004C2CC0 /* Dynamic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
@@ -158,8 +158,8 @@
 		1FFDD75D1C4DD8B8004C2CC0 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				1F039C5C1C503CF600B49F18 /* CoreDataController.swift */,
 				1F23DCDD1C4ED5E6008F937F /* CoreDataIdentifiers.swift */,
-				1FFDD7571C4DCCAE004C2CC0 /* CoreDataStack.swift */,
 				1FFDD7621C4DD9DD004C2CC0 /* Film+CoreDataProperties.swift */,
 				1FFDD7631C4DD9DD004C2CC0 /* Film.swift */,
 				1F2D27FF1C4D7DA40000DEE6 /* SFFilmLocations.xcdatamodeld */,
@@ -321,11 +321,11 @@
 				1F2D282A1C4D7E270000DEE6 /* FilmsTableViewController.swift in Sources */,
 				1F2D27F91C4D7DA40000DEE6 /* AppDelegate.swift in Sources */,
 				1FFDD7681C4EAF61004C2CC0 /* Dynamic.swift in Sources */,
-				1FFDD7581C4DCCAE004C2CC0 /* CoreDataStack.swift in Sources */,
 				1F23DCDE1C4ED5E6008F937F /* CoreDataIdentifiers.swift in Sources */,
 				1F23DCE41C4F47D1008F937F /* FilmTableViewCell.swift in Sources */,
 				1F2D282C1C4DA7C10000DEE6 /* WebService.swift in Sources */,
 				1FFDD7651C4DD9DD004C2CC0 /* Film.swift in Sources */,
+				1F039C5D1C503CF600B49F18 /* CoreDataController.swift in Sources */,
 				1FFDD7641C4DD9DD004C2CC0 /* Film+CoreDataProperties.swift in Sources */,
 				1FFDD76D1C4EB066004C2CC0 /* AllFilmsModel.swift in Sources */,
 				1F2D28011C4D7DA40000DEE6 /* SFFilmLocations.xcdatamodeld in Sources */,

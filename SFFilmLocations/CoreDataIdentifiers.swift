@@ -12,6 +12,8 @@ struct ModelEntity {
 	static let film = "Film"
 }
 
-struct FilmModelAttribute {
+struct FilmModelEntityAttribute {
 	static let title = "title"
+	static let location = "location"
+	static let releaseYear = "releaseYear"
 }

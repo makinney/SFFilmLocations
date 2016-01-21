@@ -13,17 +13,19 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-	let coreDataStack = CoreDataStack()
+	var coreDataController: CoreDataController!
 	var sfFilmMediator: SFFilmMediator?
 	var allFilmsModel: AllFilmsModel?
 	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+		coreDataController = CoreDataController()
 		if let navigationController = window?.rootViewController as? UINavigationController,
 			let filmsTableViewController = navigationController.viewControllers.first as? FilmsTableViewController {
-				allFilmsModel = AllFilmsModel(managedObjectContext: coreDataStack.managedObjectContext!)
+				allFilmsModel = AllFilmsModel(managedObjectContext: coreDataController.managedObjectContext)
 				filmsTableViewController.viewModel = allFilmsModel
 		}
-		sfFilmMediator = SFFilmMediator(coreDataStack: coreDataStack)
+		
+		sfFilmMediator = SFFilmMediator(managedObjectContext: coreDataController.managedObjectContext)
 		sfFilmMediator!.loadFilmData()
 		return true
 	}

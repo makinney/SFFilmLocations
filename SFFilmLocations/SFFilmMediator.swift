@@ -11,10 +11,10 @@ import CoreData
 class SFFilmMediator {
 	
 	let filmUrl = "https://data.sfgov.org/resource/yitu-d5am.json"
-	let coreDataStack: CoreDataStack
+	let managedObjectContext: NSManagedObjectContext
 	
-	init(coreDataStack: CoreDataStack){
-		self.coreDataStack = coreDataStack
+	init(managedObjectContext: NSManagedObjectContext){
+		self.managedObjectContext = managedObjectContext
 	}
 	
 	func loadFilmData() {
@@ -33,8 +33,7 @@ class SFFilmMediator {
 	}
 	
 	func createCoreData(filmJSON: AnyObject) {
-		guard let managedObjectContext = coreDataStack.managedObjectContext,
-			   let filmsJSON = filmJSON as? [[String:AnyObject]] else {
+		guard let filmsJSON = filmJSON as? [[String:AnyObject]] else {
 			return
 		}
 		for filmJSON in filmsJSON {
