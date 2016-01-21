@@ -23,6 +23,13 @@ class AllFilmsModel: NSObject, AllFilmsModelProtocol {
 		self.fetch()
 	}
 	
+	func film(indexPath: NSIndexPath) -> FilmModelProtocol? {
+		if let film = fetchedResultsController.objectAtIndexPath(indexPath) as? Film {
+			return film
+		}
+		return nil
+	}
+	
 	var numberOfSections: Int {
 		return fetchedResultsController.sections?.count ?? 0
 	}
@@ -35,14 +42,12 @@ class AllFilmsModel: NSObject, AllFilmsModelProtocol {
 		return sections[section].numberOfObjects
 	}
 	
-	func film(indexPath: NSIndexPath) -> FilmModelProtocol? {
-		if let film = fetchedResultsController.objectAtIndexPath(indexPath) as? Film {
-			return film
-		}
-		return nil
+	func sectionTitle(section: Int) -> String {
+		let sectionsInfo = fetchedResultsController.sections! as [NSFetchedResultsSectionInfo]
+		return sectionsInfo[section].name
 	}
 	
-	// generate fetch request based on entity name and sort descriptor
+		// generate fetch request based on entity name and sort descriptor
 	
 	// if frc is nil then create frc using fetch request
 	// else just 
@@ -59,7 +64,7 @@ class AllFilmsModel: NSObject, AllFilmsModelProtocol {
 		let fetchRequest = NSFetchRequest(entityName: ModelEntity.film)
 		let sortDesciptors = [NSSortDescriptor(key: FilmModelEntityAttribute.title, ascending: true)]
 		fetchRequest.sortDescriptors = sortDesciptors
-		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
+		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc, sectionNameKeyPath: FilmModelEntityAttribute.title, cacheName: nil)
 		return frc
 	}()
 	

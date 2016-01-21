@@ -56,7 +56,9 @@ class FilmsTableViewController: UITableViewController {
 		return cell
 	}
 	
-	
+	override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return viewModel?.sectionTitle(section)
+	}
 
 	/*
 	// MARK: - Navigation

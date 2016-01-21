@@ -19,6 +19,7 @@ protocol AllFilmsModelProtocol {
 	func film(indexPath: NSIndexPath) -> FilmModelProtocol?
 	var numberOfSections: Int { get }
 	func numberOfFilmsInSection(section: Int) -> Int
+	func sectionTitle(section: Int) -> String
 	
 //	var sort: FilmsModelSort { set get }
 }
