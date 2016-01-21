@@ -12,15 +12,15 @@ import CoreData
 class AllFilmsModel: NSObject, AllFilmsModelProtocol {
 	
 	let contentChanged: Dynamic<Bool>
-	private var films = [Film]()
+	private let fetchRequest: NSFetchRequest
 	private let moc: NSManagedObjectContext
 
 	init(managedObjectContext moc: NSManagedObjectContext) {
 		contentChanged = Dynamic(false)
 		self.moc = moc
+		fetchRequest = NSFetchRequest(entityName: ModelEntity.film)
 		super.init()
-		fetchedResultsController.delegate = self
-		self.fetch()
+		sort(FilmsModelSortBy.title, ascending: true) // sorts and fetches
 	}
 	
 	func film(indexPath: NSIndexPath) -> FilmModelProtocol? {
@@ -47,33 +47,30 @@ class AllFilmsModel: NSObject, AllFilmsModelProtocol {
 		return sectionsInfo[section].name
 	}
 	
-		// generate fetch request based on entity name and sort descriptor
-	
-	// if frc is nil then create frc using fetch request
-	// else just 
-	
-//	private func fetchResultsController(fetchRequestEntityName: String, sortDescriptorKey: String) -> NSFetchedResultsController {
-//		let fetchRequest = NSFetchRequest(entityName: fetchRequestEntityName)
-//		let sortDesciptors = [NSSortDescriptor(key: sortDescriptorKey, ascending: true)]
-//		fetchRequest.sortDescriptors = sortDesciptors
-//		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
-//		return frc
-//	}
+	func sort(sort: FilmsModelSortBy, ascending: Bool) {
+		var sortDescriptorKey = FilmModelEntityAttribute.title
+		switch (sort) {
+		case FilmsModelSortBy.title:
+			sortDescriptorKey = FilmModelEntityAttribute.title
+		case FilmsModelSortBy.location:
+			sortDescriptorKey = FilmModelEntityAttribute.location
+		case FilmsModelSortBy.releaseYear:
+			sortDescriptorKey = FilmModelEntityAttribute.releaseYear
+		}
+		let sortDesciptors = [NSSortDescriptor(key: sortDescriptorKey, ascending: ascending)]
+		fetchRequest.sortDescriptors = sortDesciptors
+		fetch()
+	}
 	
 	private lazy var fetchedResultsController: NSFetchedResultsController = {
-		let fetchRequest = NSFetchRequest(entityName: ModelEntity.film)
-		let sortDesciptors = [NSSortDescriptor(key: FilmModelEntityAttribute.title, ascending: true)]
-		fetchRequest.sortDescriptors = sortDesciptors
-		let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc, sectionNameKeyPath: FilmModelEntityAttribute.title, cacheName: nil)
+		let frc = NSFetchedResultsController(fetchRequest: self.fetchRequest, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
+		frc.delegate = self
 		return frc
 	}()
 	
 	private func fetch() {
 		do {
 			try fetchedResultsController.performFetch()
-			if let fetchedObjects = fetchedResultsController.fetchedObjects {
-				films = fetchedObjects as? [Film] ?? []
-			}
 		} catch {
 			print("\(__FUNCTION__) fetchedResultsController exception")
 		}
@@ -83,9 +80,6 @@ class AllFilmsModel: NSObject, AllFilmsModelProtocol {
 extension AllFilmsModel: NSFetchedResultsControllerDelegate {
 	
 	func controllerDidChangeContent(controller: NSFetchedResultsController) {
-		if let fetchedObjects = fetchedResultsController.fetchedObjects {
-			films = fetchedObjects as? [Film] ?? []
-		}
 		contentChanged.value = true
 	}
 }

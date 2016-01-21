@@ -16,7 +16,7 @@ class FilmsTableViewController: UITableViewController {
 		super.viewDidLoad()
 		tableView.rowHeight = UITableViewAutomaticDimension
 		tableView.estimatedRowHeight = 65
-		title = "SF Film Locations"
+		title = "San Francisco Films"
 	}
 	
 	var viewModel: AllFilmsModelProtocol? {
