@@ -8,8 +8,17 @@
 
 import Foundation
 
+//enum FilmsModelSort: String {
+//	case byTitle
+//	case byLocation
+//	case byReleaseYear
+//}
+
 protocol AllFilmsModelProtocol {
 	var contentChanged: Dynamic<Bool> { get }
-	func film(index: Int) -> FilmModelProtocol?
-	var numberOfFilms: Int { get }
+	func film(indexPath: NSIndexPath) -> FilmModelProtocol?
+	var numberOfSections: Int { get }
+	func numberOfFilmsInSection(section: Int) -> Int
+	
+//	var sort: FilmsModelSort { set get }
 }

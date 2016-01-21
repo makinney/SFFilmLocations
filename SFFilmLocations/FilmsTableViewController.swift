@@ -33,20 +33,20 @@ class FilmsTableViewController: UITableViewController {
 	}
 	
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		return 1
+		return viewModel?.numberOfSections ?? 0
 	}
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		guard let viewModel = viewModel else {
 			return 0
 		}
-		return viewModel.numberOfFilms
+		return viewModel.numberOfFilmsInSection(section)
 	}
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCellWithIdentifier(tableViewCellID, forIndexPath: indexPath) as! FilmTableViewCell
 		guard let viewModel = viewModel,
-				let film = viewModel.film(indexPath.row) else {
+				let film = viewModel.film(indexPath) else {
 			return cell
 		}
 		cell.filmName.text = film.movieTitle
