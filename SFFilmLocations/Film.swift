@@ -9,27 +9,29 @@
 import Foundation
 import CoreData
 
-class Film: NSManagedObject, FilmModelProtocol {
+class Film: NSManagedObject {
 	class func create(json: [String:AnyObject], managedObjectContext moc: NSManagedObjectContext) -> Film? {
 		if let film = NSEntityDescription.insertNewObjectForEntityForName(ModelEntity.film, inManagedObjectContext: moc) as? Film {
-			film.title = json["title"] as? String ?? ""
-			film.location = json["locations"] as? String ?? ""
-			film.releaseYear = json["release_year"] as? String ?? ""
+			film.title = json["title"] as? String ?? "Unknown"
+			film.location = json["locations"] as? String ?? "Unknown"
+			film.releaseYear = json["release_year"] as? String ?? "Unknown"
 			return film
 		}
 		return nil
 	}
-	
+}
+
+extension Film: FilmModelProtocol {
+
 	var movieTitle: String {
-		return self.title ?? ""
+		return self.title ?? "Unknown"
 	}
 	
 	var movieLocation: String {
-		return self.location ?? ""
+		return self.location ?? "Unknown"
 	}
 	
 	var movieReleaseYear: String {
-		return self.releaseYear ?? ""
+		return self.releaseYear ?? "Unknown"
 	}
-	
 }

@@ -65,7 +65,13 @@
                             <outlet property="delegate" destination="hSE-jT-7rc" id="BbR-mg-MkM"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="fre-YV-erF"/>
+                    <navigationItem key="navigationItem" id="fre-YV-erF">
+                        <barButtonItem key="rightBarButtonItem" title="Sort" id="1xg-YM-qIe">
+                            <connections>
+                                <action selector="onSort:" destination="hSE-jT-7rc" id="mXe-5U-z0n"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="XO2-HU-Be8" id="P0H-Bc-Nef"/>
                     </connections>

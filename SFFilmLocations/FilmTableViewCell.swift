@@ -21,7 +21,33 @@ class FilmTableViewCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
-
+	
+	var topCellText: String {
+		set(value) {
+			filmName.text = value
+		}
+		get {
+			return filmName.text ?? ""
+		}
+	}
+	
+	var middleCellText: String {
+		set(value) {
+			releaseDate.text = value
+		}
+		get {
+			return releaseDate.text ?? ""
+		}
+	}
+		
+	var bottomCellText: String {
+		set(value) {
+			location.text = value
+		}
+		get {
+			 return location.text ?? ""
+		}
+	}
+	
 }

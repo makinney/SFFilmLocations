@@ -40,7 +40,4 @@ class SFFilmMediator {
 			let _ = Film.create(filmJSON,managedObjectContext: managedObjectContext)
 		}
 	}
-	
-
-	
 }

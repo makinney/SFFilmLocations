@@ -20,5 +20,6 @@ protocol AllFilmsModelProtocol {
 	var numberOfSections: Int { get }
 	func numberOfFilmsInSection(section: Int) -> Int
 	func sectionTitle(section: Int) -> String
-	func sort(sort: FilmsModelSortBy, ascending: Bool)
+	func sort(sortBy: FilmsModelSortBy, ascending: Bool)
+	var sortedBy: FilmsModelSortBy { get }
 }

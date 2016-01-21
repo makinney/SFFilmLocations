@@ -14,13 +14,28 @@ class AllFilmsModel: NSObject, AllFilmsModelProtocol {
 	let contentChanged: Dynamic<Bool>
 	private let fetchRequest: NSFetchRequest
 	private let moc: NSManagedObjectContext
-
+	private var sortBy = FilmsModelSortBy.title
+	
 	init(managedObjectContext moc: NSManagedObjectContext) {
-		contentChanged = Dynamic(false)
 		self.moc = moc
+		contentChanged = Dynamic(false)
 		fetchRequest = NSFetchRequest(entityName: ModelEntity.film)
 		super.init()
-		sort(FilmsModelSortBy.title, ascending: true) // sorts and fetches
+		sort(sortBy, ascending: true) // sorts and fetches
+	}
+	
+	private lazy var fetchedResultsController: NSFetchedResultsController = {
+		let frc = NSFetchedResultsController(fetchRequest: self.fetchRequest, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
+		frc.delegate = self
+		return frc
+	}()
+	
+	private func fetch() {
+		do {
+			try fetchedResultsController.performFetch()
+		} catch {
+			print("\(__FUNCTION__) fetchedResultsController exception")
+		}
 	}
 	
 	func film(indexPath: NSIndexPath) -> FilmModelProtocol? {
@@ -47,9 +62,10 @@ class AllFilmsModel: NSObject, AllFilmsModelProtocol {
 		return sectionsInfo[section].name
 	}
 	
-	func sort(sort: FilmsModelSortBy, ascending: Bool) {
+	func sort(sortBy: FilmsModelSortBy, ascending: Bool) {
 		var sortDescriptorKey = FilmModelEntityAttribute.title
-		switch (sort) {
+		
+		switch (sortBy) {
 		case FilmsModelSortBy.title:
 			sortDescriptorKey = FilmModelEntityAttribute.title
 		case FilmsModelSortBy.location:
@@ -57,22 +73,17 @@ class AllFilmsModel: NSObject, AllFilmsModelProtocol {
 		case FilmsModelSortBy.releaseYear:
 			sortDescriptorKey = FilmModelEntityAttribute.releaseYear
 		}
+		
 		let sortDesciptors = [NSSortDescriptor(key: sortDescriptorKey, ascending: ascending)]
 		fetchRequest.sortDescriptors = sortDesciptors
 		fetch()
+		self.sortBy = sortBy
+		contentChanged.value = true
 	}
-	
-	private lazy var fetchedResultsController: NSFetchedResultsController = {
-		let frc = NSFetchedResultsController(fetchRequest: self.fetchRequest, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
-		frc.delegate = self
-		return frc
-	}()
-	
-	private func fetch() {
-		do {
-			try fetchedResultsController.performFetch()
-		} catch {
-			print("\(__FUNCTION__) fetchedResultsController exception")
+
+	var sortedBy: FilmsModelSortBy {
+		get {
+			return sortBy
 		}
 	}
 }
